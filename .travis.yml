@@ -3,3 +3,11 @@ language: go
 
 go:
   - 1.5.1
+
+deploy:
+  provider: releases
+  api_key: "knSrCQ+NyOExzAk0YwyW6HVFgWGdjVByoA3PNpnsMyU5z2nAra6I1EWqqHESPCC8rnrPEgwCozOUXaeJsUhPZ8bq0m/4CwfFYvsIRjm6NeazOUN/ac79TjKecZd9oooi2ZRbwW5mqami1X3+bMTeyUfajhht4Ka2iVSBNS70hE3gTOuxFr3vKaZJt6CzsMGDfMqRLbKln1W991cficfZQjnHWF04Cosq2S1Bd6/BomVJgybrOLLS4Ixb+/H/6vg1EDqYBJUntZ1G6+1zPV7ckqUCn7bdj+vMS9IOByBb04fQpsborMnC5sys3QQFL1wHTM/jTT3nvtiTyg7r9O+A+vNf5XFFWti3+Q0o9+2+meL0ZSc30SpfMBxAPOZwsb+wphOp30FQiXSeDieyQ8qLUMScvUbzvSirYJA69nNdOgnWQBGqBQLBsRrLzwxFhTJ7aqwZu0Sjskus0jwEu3ub+SeKmji5JQaqBy9PmPXxgcgNIntyEZf0hz9Gp54jkaayakIkS2uEK/qZoSuUCb1wRsj2gO4cmSOUbbKIa5nvsUZbHUHso9YkriUgvCjg15dslMNv+jnO9aF58SQMeu6cSMIhh+a4dEeQ41PvWf2z415UwOQzxgyrYMYVmENuwPHjQTgTLFVnuoq33nsZw+UpUMG4pabkGEFerPwv8yoOaLQ="
+  file: "./bin/lsdvol"
+  skip_cleanup: true
+  on:
+    tags: true
