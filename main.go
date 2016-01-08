@@ -18,6 +18,7 @@ var showVersion = flag.Bool("version", false, "print version and exit")
 var socketPath = flag.String("docker-socket", "/var/run/docker.sock", "path to socket for Docker")
 var outputJson = flag.Bool("json", false, "output in JSON format")
 var outputLong = flag.Bool("l", false, "output in detailed format")
+var outputOnePerLine = flag.Bool("1", false, "output one per line")
 
 func init() {
 	flag.Usage = func() {
@@ -67,7 +68,17 @@ func main() {
 		printVolumesJson(volumes)
 		os.Exit(0)
 	}
-	printVolumes(volumes)
+	if *outputOnePerLine || isTerminal() {
+		printVolumesOnePerLine(volumes)
+		os.Exit(0)
+	}
+	printVolumesSpaced(volumes)
+	os.Exit(0)
+}
+
+func isTerminal() bool {
+	var info, _ = os.Stdout.Stat()
+	return info.Mode()&os.ModeCharDevice == os.ModeCharDevice
 }
 
 func printVolumesLong(volumes []DockerVolume) {
@@ -89,10 +100,21 @@ func printVolumesJson(volumes []DockerVolume) {
 	}
 }
 
-func printVolumes(volumes []DockerVolume) {
+func printVolumesOnePerLine(volumes []DockerVolume) {
 	for _, v := range volumes {
 		fmt.Println(v.Path)
 	}
+}
+
+func printVolumesSpaced(volumes []DockerVolume) {
+	for i, v := range volumes {
+		if i == 0 {
+			fmt.Print(v.Path)
+		} else {
+			fmt.Printf(" %s", v.Path)
+		}
+	}
+	fmt.Println()
 }
 
 func detectContainerId() (string, error) {
