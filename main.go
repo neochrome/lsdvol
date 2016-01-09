@@ -32,6 +32,7 @@ autodetected.
 
 Options:`)
 		flag.PrintDefaults()
+		fmt.Fprintf(os.Stderr, "\nNOTE: This tool requires Docker Remote API version %s or greater.\n", DockerAPIVersion)
 	}
 }
 
