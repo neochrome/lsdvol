@@ -124,7 +124,7 @@ func detectContainerId() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	var id = regexp.MustCompile("[a-f0-9]{64}")
+	var id = regexp.MustCompile("[a-f0-9]{64}$")
 	var scanner = bufio.NewScanner(file)
 	for scanner.Scan() {
 		if err := scanner.Err(); err != nil {
