@@ -1,0 +1,3 @@
+FROM busybox
+ADD bin/lsdvol /lsdvol
+CMD /lsdvol

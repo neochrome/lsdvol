@@ -14,3 +14,11 @@ $(BINARY): *.go
 clean:
 	@echo cleaning
 	@rm -rf bin
+	-@docker rmi lsdvol:test
+
+test: build
+	@docker build -t lsdvol:test -f Dockerfile.test .
+	@docker run --rm -it \
+		-v /var/run/docker.sock:/var/run/docker.sock \
+		-v $$PWD:/it-works lsdvol:test \
+		| grep '^\/it-works'
